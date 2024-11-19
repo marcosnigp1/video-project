@@ -19,10 +19,12 @@ function setup() {
   //Preparing video.
   video.size(windowWidth, windowHeight);
   video.hide();
+  video.hideControls();
 
   //Preparing UI class.
   ui = new UI(width * 0.45, height * 0.9, 2);
   windowResized();
+  video.attribute("playsinline", "true");
 }
 
 function draw() {
@@ -32,7 +34,7 @@ function draw() {
 
   //Show UI.
   ui.show();
-  print(video.time());
+  //print(video.time());
 
   //Check if video is in certain seconds to call the decisions. (IF CONDITIONS GALORE).
   if (video.time() > 19.4 && video.time() < 20.0) {
