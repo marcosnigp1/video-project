@@ -87,3 +87,36 @@ function mousePressed() {
     ui.play_video();
   }
 }
+
+//Code for touchscreens.
+function touchStarted() {
+  if (playing && ui.decision_moment != 1) {
+    ui.pause_video();
+  } else if (ui.decision_moment != 1) {
+    ui.play_video();
+    //video.time(30.3);
+  }
+  playing = !playing;
+
+  if (
+    mouseX > ui.position.x * 0.3 &&
+    mouseX < ui.position.x * 0.9 &&
+    mouseY > ui.position.y * 0.88 &&
+    mouseY < ui.position.y * 1 &&
+    ui.decision_moment == 1
+  ) {
+    ui.jump_to_seconds(ui.time_skip_a);
+    ui.decision_moment = 0;
+    ui.play_video();
+  } else if (
+    mouseX > ui.position.x * 1.3 &&
+    mouseX < ui.position.x * 1.9 &&
+    mouseY > ui.position.y * 0.88 &&
+    mouseY < ui.position.y * 1 &&
+    ui.decision_moment == 1
+  ) {
+    ui.jump_to_seconds(ui.time_skip_b);
+    ui.decision_moment = 0;
+    ui.play_video();
+  }
+}
