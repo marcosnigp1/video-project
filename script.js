@@ -8,22 +8,8 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Select elements
-const playButton = document.querySelector('.play-btn');
-const infoButton = document.querySelector('.info-btn');
+
 const backgroundVideo = document.querySelector('.background-video');
-
-// Play button functionality
-playButton.addEventListener('click', () => {
-    if (backgroundVideo.paused) {
-        backgroundVideo.play();
-        playButton.textContent = '⏸ Pause'; // Change button text to 'Pause' when video is playing
-    } else {
-        backgroundVideo.pause();
-        playButton.textContent = '▶ Play'; // Change button text to 'Play' when video is paused
-    }
-});
-
 
 // Carousel scrolling (optional, improves navigation for large carousels)
 const carousel = document.querySelector('.carousel-items');
