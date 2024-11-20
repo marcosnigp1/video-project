@@ -24,7 +24,7 @@ function setup() {
   //Preparing UI class.
   ui = new UI(width * 0.45, height * 0.9, 2);
   windowResized();
-  //video.attribute("playsinline", "true");
+  video.attribute("playsinline", "true");
 }
 
 function draw() {
