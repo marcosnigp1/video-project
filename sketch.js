@@ -63,7 +63,7 @@ function mousePressed() {
     ui.pause_video();
   } else if (ui.decision_moment != 1) {
     ui.play_video();
-    //video.time(30.3);
+    //video.time(10.3);
   }
   playing = !playing;
 
