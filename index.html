@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=notifications_active" />
     <link rel="icon" href="Nav-pictures/MOVIE STRUDIO (1)-Photoroom.png" type="image/png">
-
 </head>
 <body>
     <!-- Navbar -->
@@ -15,7 +14,7 @@
         <div class="logo">
             <a href="index.html"><img src="Nav-pictures/MOVIE STRUDIO (1)-Photoroom.png" alt="My Logo" height="100px"></a>
         </div>
-        <nav  class="ul1">
+        <nav class="ul1">
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="Movie.html">Movie</a></li>
@@ -24,34 +23,33 @@
         </nav>
         <div class="notification-section">
             <a href="Movie.html"><img src="Nav-pictures/Camera-Photoroom.png" alt="My Logo" height="80px"></a>
-            
+            <!-- Mute/Unmute Button -->
+            <button id="sound-control" class="sound-btn">🔇 Mute</button>
         </div>
-        
     </header>
 
     <!-- Background Video Section -->
-   <section class="hero-section">
-    <video class="background-video" loop autoplay muted>
-                <source src="./Movie-file/Smile2.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-    </video>
-    <div class="content">
-        <h1>Smile 2</h1>
-        <p>
-           Dr. Rose Cotter returns to face a new terror in Smile 2, escalating psychological horror with eerie visuals.
-        </p>
-        <div class="buttons">
-            <button class="play-btn" onclick="play1()">▶️ Play</button>
-            <button class="info-btn" onclick="Next()">Bts</button>
+    <section class="hero-section">
+        <video class="background-video" loop autoplay muted>
+            <source src="./Movie-file/Smile2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="content">
+            <h1>Smile 2</h1>
+            <p>
+                Dr. Rose Cotter returns to face a new terror in Smile 2, escalating psychological horror with eerie visuals.
+            </p>
+            <div class="buttons">
+                <button class="play-btn" onclick="play1()">▶️ Play</button>
+                <button class="info-btn" onclick="Next()">Bts</button>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- Carousel Section -->
     <section class="carousel">
         <h2>MORE & MORE</h2>
         <div class="carousel-items">
-            <!-- Carousel items with images -->
             <div class="carousel-item" data-video="https://www.youtube.com/embed/NOhDyUmT9z0?autoplay=1">
                 <img src="Mocie-Carousel/mission-1.jpg" alt="Video Thumbnail">
             </div>
@@ -79,26 +77,30 @@
         </div>
     </section>
 
-    <script src="script.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const video = document.querySelector('.background-video');
-            if (video) {
-                video.muted = true; // Required for autoplay
-                video.play().then(() => {
-                    console.log('Video is playing.');
-                }).catch((error) => {
-                    console.error('Video autoplay failed. Browser policies might be restricting playback:', error);
-                });
+        // Toggle sound functionality
+        const soundButton = document.getElementById('sound-control');
+        const video = document.querySelector('.background-video');
+
+        soundButton.addEventListener('click', () => {
+            if (video.muted) {
+                video.muted = false;
+                soundButton.textContent = '🔊 Unmute';
+            } else {
+                video.muted = true;
+                soundButton.textContent = '🔇 Mute';
             }
         });
-         function play1() {
-            window.location.href = 'Movie.html'; // Corrected string here
+
+        // Play Movie
+        function play1() {
+            window.location.href = 'Movie.html';
         }
+
+        // Go to BTS
         function Next() {
-            window.location.href = 'Info.html'; // Corrected string here
+            window.location.href = 'Info.html';
         }
     </script>
-
 </body>
 </html>
