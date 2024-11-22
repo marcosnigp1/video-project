@@ -91,17 +91,23 @@ html,body {
 
 @media screen and (max-width: 768px) {
     .background-video {
+       
         width: 100vw; /* Ensure full width on smaller screens */
-        height: auto; /* Allow height to adjust proportionally */
+        height: 100vw; /* Allow height to adjust proportionally */
         object-fit: cover;
     }
 }
 
 @media screen and (max-width: 480px) {
     .background-video {
-        width: 120%; /* Adjust width slightly for very small screens to prevent cropping */
-        height: auto;
-        object-fit: cover;
+        
+        width: 100%; /* Adjust width slightly for very small screens to prevent cropping */
+        height: 50%;
+        object-fit: fill;
+    }
+    .hero-section{
+        position: relative;
+       margin-top: 10%;
     }
 }
 
@@ -462,3 +468,14 @@ main{
     }
 }
 
+.info-btn:hover {
+    background-color: rgba(255, 0, 0, 0.7);  /* Change to red on hover */
+}
+.play-btn:hover {
+    background-color: white;  /* Play button hover effect */
+    color: red;
+}
+.navbar li a:hover {
+    color: #e50914;  /* Change text color on hover */
+    transition: color 0.3s ease;
+}
