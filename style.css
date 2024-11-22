@@ -89,19 +89,22 @@ html,body {
     z-index: 0; /* Puts the video behind all other content */
 }
 
-@media (max-width: 767px) {
-    /* Adjustments for small screens (mobiles) */
+@media screen and (max-width: 768px) {
     .background-video {
-        object-position: center; /* Centers the video */
+        width: 100vw; /* Ensure full width on smaller screens */
+        height: auto; /* Allow height to adjust proportionally */
+        object-fit: cover;
     }
 }
 
-@media (max-width: 1024px) {
-    /* Adjustments for tablets */
+@media screen and (max-width: 480px) {
     .background-video {
-        object-position: center; /* Centers the video */
+        width: 120%; /* Adjust width slightly for very small screens to prevent cropping */
+        height: auto;
+        object-fit: cover;
     }
 }
+
 
  .content {
     position: absolute;
