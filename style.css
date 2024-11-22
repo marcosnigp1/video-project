@@ -23,7 +23,8 @@ html,body {
     height: 8%;
     box-shadow: none;
     background-color: black;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;   
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; 
+     border-bottom: 1px solid red;
 }
 
 .navbar.scrolled {
