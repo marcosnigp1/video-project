@@ -10,7 +10,7 @@ let playing = true;
 let ui;
 
 function preload() {
-  video = createVideo("media/steamedhams.mp4");
+  video = createVideo("media/richmond.mp4");
 }
 
 function setup() {
