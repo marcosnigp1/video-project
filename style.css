@@ -426,3 +426,16 @@ main{
         width: 80px;
     }
 }
+.mute-btn {
+    position: relative;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-size: 36px;
+    cursor: pointer;
+    margin-top: -60%;
+
+}
+.mute-btn:hover {
+    color: #f1c40f;
+}
