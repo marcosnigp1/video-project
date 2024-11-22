@@ -89,6 +89,19 @@ html,body {
     z-index: 0; /* Puts the video behind all other content */
 }
 
+@media (max-width: 767px) {
+    /* Adjustments for small screens (mobiles) */
+    .background-video {
+        object-position: center; /* Centers the video */
+    }
+}
+
+@media (max-width: 1024px) {
+    /* Adjustments for tablets */
+    .background-video {
+        object-position: center; /* Centers the video */
+    }
+}
 
  .content {
     position: absolute;
