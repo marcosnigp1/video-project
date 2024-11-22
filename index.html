@@ -24,10 +24,10 @@
         </nav>
         <div class="notification-section">
             <a class="ul1"  href="Movie.html"><img src="Nav-pictures/Camera-Photoroom.png" alt="My Logo" height="80px"></a>
-            <div id="player">
-                <i class="fa fa-volume-down"></i>
-                <input type="range" id="volume-slider" min="0" max="100" value="50">
-                <i class="fa fa-volume-up"></i>
+           <div id="player">
+                <button id="mute-button" class="mute-btn">
+                    <i class="fa fa-volume-mute"></i>
+                </button>
             </div>
         </div>
     </header>
@@ -84,31 +84,21 @@
     </section>
 
    <script>
-        // Initialize elements
-        const volumeSlider = document.getElementById('volume-slider');
+       // Initialize elements
         const video = document.querySelector('.background-video');
+        const muteButton = document.getElementById('mute-button');
+        const muteIcon = muteButton.querySelector('i');
 
-        // Set initial state for slider and video
-        video.volume = 0; // Set volume to 0
-        video.muted = true; // Ensure video is muted
-        volumeSlider.classList.remove('active'); // Slider is inactive at start
-
-        // Activate the slider and unmute video on first interaction
-        volumeSlider.addEventListener('mousedown', () => {
-            volumeSlider.classList.add('active'); // Activate slider visually
-            video.muted = false; // Unmute the video
-        });
-
-        // Adjust video volume as the slider moves
-        volumeSlider.addEventListener('input', () => {
-            const volume = volumeSlider.value / 100; // Convert slider value (0-100) to video volume range (0-1)
-            video.volume = volume; // Set video volume
-
-            // Mute the video if volume is set to 0
-            if (volume === 0) {
-                video.muted = true;
+        // Toggle mute/unmute on button click
+        muteButton.addEventListener('click', () => {
+            if (video.muted) {
+                video.muted = false; // Unmute the video
+                muteIcon.classList.remove('fa-volume-mute');
+                muteIcon.classList.add('fa-volume-up');
             } else {
-                video.muted = false;
+                video.muted = true; // Mute the video
+                muteIcon.classList.remove('fa-volume-up');
+                muteIcon.classList.add('fa-volume-mute');
             }
         });
 
@@ -121,6 +111,7 @@
         function Next() {
             window.location.href = 'Info.html';
         }
+
     </script>
 </body>
 </html>
