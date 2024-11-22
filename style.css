@@ -439,3 +439,9 @@ main{
 .mute-btn:hover {
     color: #f1c40f;
 }
+@media (max-width: 768px){
+    .mute-btn{
+        margin-top: -5px;
+    }
+}
+
