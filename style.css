@@ -93,7 +93,7 @@ html,body {
     .background-video {
        
         width: 100vw; /* Ensure full width on smaller screens */
-        height: 100vw; /* Allow height to adjust proportionally */
+        height: auto; /* Allow height to adjust proportionally */
         object-fit: cover;
     }
 }
@@ -102,12 +102,18 @@ html,body {
     .background-video {
         
         width: 100%; /* Adjust width slightly for very small screens to prevent cropping */
-        height: 50%;
-        object-fit: fill;
+        height: auto;
+        object-fit: cover;
     }
     .hero-section{
         position: relative;
-       margin-top: 10%;
+       margin-top: 25%;
+    }
+    .content{
+        margin-top: -10%;
+    }
+    .carousel{
+        margin-top: -50%;
     }
 }
 
