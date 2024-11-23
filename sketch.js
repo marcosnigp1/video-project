@@ -5,6 +5,7 @@
 //Variables for video.
 let video;
 let playing = true;
+let img;
 
 //Variables for UI.
 let ui;
@@ -14,10 +15,11 @@ function preload() {
 }
 
 function setup() {
+  frameRate(60);
   createCanvas(windowWidth, windowHeight);
 
   //Preparing video.
-  video.size(windowWidth, windowHeight);
+  //video.size(windowWidth, windowHeight);
   video.hide();
   video.hideControls();
 
@@ -30,8 +32,12 @@ function setup() {
 
 function draw() {
   background(0);
-  let img = video.get();
+  push();
+  img = video.get();
+  translate(0, -(height * 0.07));
+  img.resize(windowWidth, 0);
   image(img, 0, 0); //redraws the video frame by frame in p5js.
+  pop();
 
   //Show UI.
   ui.show();
@@ -51,7 +57,9 @@ function draw() {
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
-  video.size(windowWidth, windowHeight);
+  img = video.get();
+  img.resize(windowWidth, 0);
+  //video.size(windowWidth, windowHeight);
 
   //Update UI position.
   ui.position.x = width * 0.45;
