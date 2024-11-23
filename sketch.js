@@ -32,9 +32,10 @@ function setup() {
 
 function draw() {
   background(0);
+
+  //Draw movie.
   push();
   img = video.get();
-  translate(0, -(height * 0.07));
   img.resize(windowWidth, 0);
   image(img, 0, 0); //redraws the video frame by frame in p5js.
   pop();
@@ -43,7 +44,7 @@ function draw() {
   ui.show();
   //print(video.time());
 
-  //Check if video is in certain seconds to call the decisions. (IF CONDITIONS GALORE).
+  //Check if video is in certain seconds to call the decisions. (IF CONDITIONS EVERYWHERE).
   if (video.time() > 19.4 && video.time() < 20.0) {
     ui.decision_moment = 1;
     ui.show_decision(1);
@@ -68,14 +69,29 @@ function windowResized() {
 
 //Can not use isPlaying() cause it seems to be reserved for audio.
 function mousePressed() {
-  if (playing && ui.decision_moment != 1) {
+  //Play and stop button.
+  if (
+    playing &&
+    ui.decision_moment != 1 &&
+    mouseX > ui.position.x * 1.08 &&
+    mouseX < ui.position.x * 1.15 &&
+    mouseY > ui.position.y * 1.055 &&
+    mouseY < ui.position.y * 1.11
+  ) {
     ui.pause_video();
-  } else if (ui.decision_moment != 1) {
+  } else if (
+    ui.decision_moment != 1 &&
+    mouseX > ui.position.x * 1.08 &&
+    mouseX < ui.position.x * 1.15 &&
+    mouseY > ui.position.y * 1.055 &&
+    mouseY < ui.position.y * 1.11
+  ) {
     ui.play_video();
     //video.time(10.3);
   }
   playing = !playing;
 
+  //Decision boxes.
   if (
     mouseX > ui.position.x * 0.3 &&
     mouseX < ui.position.x * 0.9 &&
@@ -96,6 +112,35 @@ function mousePressed() {
     ui.play_video();
     ui.jump_to_seconds(ui.time_skip_b);
     ui.decision_moment = 0;
+  }
+
+  //Fullscreen button.
+  if (
+    ui.fullscreen_mode == 0 &&
+    mouseX > ui.position.x * 1.33 &&
+    mouseX < ui.position.x * 1.39 &&
+    mouseY > ui.position.y * 1.06 &&
+    mouseY < ui.position.y * 1.103
+  ) {
+    fullscreen(true);
+    ui.fullscreen_mode = 1;
+  } else if (
+    ui.fullscreen_mode == 1 &&
+    mouseX > ui.position.x * 1.33 &&
+    mouseX < ui.position.x * 1.39 &&
+    mouseY > ui.position.y * 1.06 &&
+    mouseY < ui.position.y * 1.103
+  ) {
+    fullscreen(false);
+    ui.fullscreen_mode = 0;
+  }
+}
+
+function keyPressed() {
+  if (key == "c") {
+    {
+      fullscreen(true);
+    }
   }
 }
 

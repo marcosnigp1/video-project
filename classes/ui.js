@@ -7,6 +7,7 @@ class UI {
     this.part = 0; //Divide the decisions into parts.
     this.spoon_collected = 0;
     this.decision_moment = 0;
+    this.fullscreen_mode = 0; //0 = Not in fullscreen mode, 1 = In fullscreen mode.
 
     //Text for UI.
     this.text_a = "";
@@ -15,39 +16,67 @@ class UI {
     //To get the values to jump to specific times.
     this.time_skip_a = 0;
     this.time_skip_b = 0;
+
+    //Variables for volume slider.
+    this.volume = 1.0;
   }
 
   show() {
     //Reused code from last project.
     //UI to play and stop video.
+
+    //White bar that highlight the menu.
+    push();
+    fill(255);
+    rect(0, height * 0.945, windowWidth, windowHeight);
+    pop();
+
     push();
     fill(0);
     stroke(255);
     strokeWeight(2);
+
+    // -------- Play and stop button --------
     if (this.state == 0 && this.decision_moment != 1) {
       beginShape();
-      vertex(this.position.x * 1.15, this.position.y * 0.87);
-      vertex(this.position.x * 1.15, this.position.y * 0.94);
-      vertex(this.position.x * 1.2, this.position.y * 0.903);
+      vertex(this.position.x * 1.1, this.position.y * 1.055);
+      vertex(this.position.x * 1.1, this.position.y * 1.11);
+      vertex(this.position.x * 1.15, this.position.y * 1.08);
       endShape(CLOSE);
     } else if (this.decision_moment != 1) {
       beginShape();
-      vertex(this.position.x * 1.14, this.position.y * 0.88);
-      vertex(this.position.x * 1.16, this.position.y * 0.88);
-      vertex(this.position.x * 1.16, this.position.y * 0.93);
-      vertex(this.position.x * 1.14, this.position.y * 0.93);
+      vertex(this.position.x * 1.08, this.position.y * 1.055);
+      vertex(this.position.x * 1.1, this.position.y * 1.055);
+      vertex(this.position.x * 1.1, this.position.y * 1.11);
+      vertex(this.position.x * 1.08, this.position.y * 1.11);
       endShape(CLOSE);
 
       beginShape();
-      vertex(this.position.x * 1.18, this.position.y * 0.88);
-      vertex(this.position.x * 1.2, this.position.y * 0.88);
-      vertex(this.position.x * 1.2, this.position.y * 0.93);
-      vertex(this.position.x * 1.18, this.position.y * 0.93);
+      vertex(this.position.x * 1.13, this.position.y * 1.055);
+      vertex(this.position.x * 1.15, this.position.y * 1.055);
+      vertex(this.position.x * 1.15, this.position.y * 1.11);
+      vertex(this.position.x * 1.13, this.position.y * 1.11);
       endShape(CLOSE);
     }
     pop();
 
     if (this.decision_moment == 1) {
+      //X sign indicating that the movie can not be started or stopped.
+      push();
+      stroke(0);
+      strokeWeight(2);
+
+      beginShape();
+      vertex(this.position.x * 1.08, this.position.y * 1.055);
+      vertex(this.position.x * 1.15, this.position.y * 1.11);
+      endShape(CLOSE);
+
+      beginShape();
+      vertex(this.position.x * 1.15, this.position.y * 1.055);
+      vertex(this.position.x * 1.08, this.position.y * 1.11);
+      endShape(CLOSE);
+      pop();
+
       //Decision boxes.
       push();
 
@@ -81,6 +110,132 @@ class UI {
 
       pop();
     }
+
+    // -------- Fullscreen icon --------.
+    if (this.fullscreen_mode == 0) {
+      push();
+      strokeWeight(3);
+      stroke(0);
+
+      //Left upper part.
+      beginShape();
+      vertex(this.position.x * 1.33, this.position.y * 1.06);
+      vertex(this.position.x * 1.33, this.position.y * 1.075);
+      endShape(CLOSE);
+
+      beginShape();
+      vertex(this.position.x * 1.33, this.position.y * 1.06);
+      vertex(this.position.x * 1.35, this.position.y * 1.06);
+      endShape(CLOSE);
+
+      //Left bottom part.
+      beginShape();
+      vertex(this.position.x * 1.33, this.position.y * 1.09);
+      vertex(this.position.x * 1.33, this.position.y * 1.105);
+      endShape(CLOSE);
+
+      beginShape();
+      vertex(this.position.x * 1.33, this.position.y * 1.105);
+      vertex(this.position.x * 1.35, this.position.y * 1.105);
+      endShape(CLOSE);
+
+      //Right upper part.
+      beginShape();
+      vertex(this.position.x * 1.39, this.position.y * 1.06);
+      vertex(this.position.x * 1.39, this.position.y * 1.075);
+      endShape(CLOSE);
+
+      beginShape();
+      vertex(this.position.x * 1.39, this.position.y * 1.06);
+      vertex(this.position.x * 1.37, this.position.y * 1.06);
+      endShape(CLOSE);
+
+      //Right bottom part.
+      beginShape();
+      vertex(this.position.x * 1.39, this.position.y * 1.09);
+      vertex(this.position.x * 1.39, this.position.y * 1.105);
+      endShape(CLOSE);
+
+      beginShape();
+      vertex(this.position.x * 1.39, this.position.y * 1.105);
+      vertex(this.position.x * 1.37, this.position.y * 1.105);
+      endShape(CLOSE);
+      pop();
+    } else if (this.fullscreen_mode == 1) {
+      push();
+      strokeWeight(3);
+      stroke(0);
+
+      //Left upper part.
+      beginShape();
+      vertex(this.position.x * 1.33, this.position.y * 1.075);
+      vertex(this.position.x * 1.35, this.position.y * 1.075);
+      endShape(CLOSE);
+
+      beginShape();
+      vertex(this.position.x * 1.35, this.position.y * 1.06);
+      vertex(this.position.x * 1.35, this.position.y * 1.075);
+      endShape(CLOSE);
+
+      //Left bottom part.
+      beginShape();
+      vertex(this.position.x * 1.33, this.position.y * 1.09);
+      vertex(this.position.x * 1.35, this.position.y * 1.09);
+      endShape(CLOSE);
+
+      beginShape();
+      vertex(this.position.x * 1.35, this.position.y * 1.09);
+      vertex(this.position.x * 1.35, this.position.y * 1.105);
+      endShape(CLOSE);
+
+      //Right upper part.
+      beginShape();
+      vertex(this.position.x * 1.37, this.position.y * 1.06);
+      vertex(this.position.x * 1.37, this.position.y * 1.075);
+      endShape(CLOSE);
+
+      beginShape();
+      vertex(this.position.x * 1.39, this.position.y * 1.075);
+      vertex(this.position.x * 1.37, this.position.y * 1.075);
+      endShape(CLOSE);
+
+      //Right bottom part.
+      beginShape();
+      vertex(this.position.x * 1.37, this.position.y * 1.09);
+      vertex(this.position.x * 1.39, this.position.y * 1.09);
+      endShape(CLOSE);
+
+      beginShape();
+      vertex(this.position.x * 1.37, this.position.y * 1.09);
+      vertex(this.position.x * 1.37, this.position.y * 1.105);
+      endShape(CLOSE);
+      pop();
+    }
+
+    // -------- Volume slider --------.
+
+    push();
+    stroke(0);
+    strokeWeight(2);
+    noFill();
+    //Bar.
+    rect(
+      this.position.x * 0.2,
+      this.position.y * 1.075,
+      this.position.x * 0.65,
+      this.position.y * 0.01
+    );
+    pop();
+
+    push();
+    //Circle for progress.
+    fill(30);
+    circle(
+      this.position.x * 0.2,
+      this.position.y * 1.08,
+      this.position.x * 0.04
+    );
+    pop();
   }
 
   show_decision(part) {
@@ -112,6 +267,20 @@ class UI {
 
       default:
         break;
+    }
+  }
+
+  //Updates the value of the volume slider.
+  update_volume_values(x, y) {
+    //Update values, such as position and audio time
+
+    this.song_time_total = round(audio.duration(), 0);
+    this.song_time_left = round(audio.currentTime(), 0);
+
+    if (audio.isPlaying()) {
+      this.play = 1;
+    } else {
+      this.play = 0;
     }
   }
 
