@@ -28,8 +28,6 @@ function setup() {
   windowResized();
   video.attribute("preload", "true");
   video.attribute("playsinline", "true");
-
-  video.volume(0);
 }
 
 function draw() {
@@ -39,7 +37,9 @@ function draw() {
   push();
   img = video.get();
   img.resize(windowWidth, 0);
-  image(img, 0, 0); //redraws the video frame by frame in p5js.
+
+  checkWindowWidth(); //This function helps to position the video.
+
   pop();
 
   //Check if volume slider is pressed
@@ -49,8 +49,8 @@ function draw() {
     if (
       mouseX > ui.position.x * 0.2 &&
       mouseX < ui.position.x * 0.65 + ui.position.x * 0.2 &&
-      mouseY > ui.position.y * 1.075 &&
-      mouseY < ui.position.y * 1.075 + ui.position.y * 0.01
+      mouseY > ui.position.y * 1.065 &&
+      mouseY < ui.position.y * 1.072 + ui.position.y * 0.03
     ) {
       let volume_value = map(
         mouseX,
@@ -77,17 +77,6 @@ function draw() {
     ui.show_decision(2);
     ui.pause_video();
   }
-}
-
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-  img = video.get();
-  img.resize(windowWidth, 0);
-  //video.size(windowWidth, windowHeight);
-
-  //Update UI position.
-  ui.position.x = width * 0.45;
-  ui.position.y = height * 0.9;
 }
 
 //Can not use isPlaying() cause it seems to be reserved for audio.
@@ -160,9 +149,15 @@ function mousePressed() {
 }
 
 function keyPressed() {
-  if (key == "c") {
+  if (key == "f" || key == "F") {
     {
-      fullscreen(true);
+      if (ui.fullscreen_mode == 0) {
+        fullscreen(true);
+        ui.fullscreen_mode = 1;
+      } else if (ui.fullscreen_mode == 1) {
+        fullscreen(false);
+        ui.fullscreen_mode = 0;
+      }
     }
   }
 }
@@ -233,5 +228,49 @@ function touchStarted() {
   ) {
     fullscreen(false);
     ui.fullscreen_mode = 0;
+  }
+
+  //Audio slider.
+  ///If mouse is clicked inside the bar, check current position and then adjust the volume.
+  if (
+    mouseX > ui.position.x * 0.2 &&
+    mouseX < ui.position.x * 0.65 + ui.position.x * 0.2 &&
+    mouseY > ui.position.y * 1.075 &&
+    mouseY < ui.position.y * 1.075 + ui.position.y * 0.01
+  ) {
+    let volume_value = map(
+      mouseX,
+      ui.position.x * 0.2,
+      ui.position.x * 0.65 + ui.position.x * 0.2,
+      0,
+      1.0
+    );
+    video.volume(volume_value);
+  }
+}
+
+//This is mostly used for responsiveness.
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  img = video.get();
+  img.resize(windowWidth, 0);
+  //video.size(windowWidth, windowHeight);
+
+  //Update UI position.
+  ui.position.x = width * 0.45;
+  ui.position.y = height * 0.9;
+}
+
+//Used mostly for responsiveness on phones.
+function checkWindowWidth() {
+  if (windowWidth <= 428) {
+    image(img, 0, height * 0.4);
+  } else if (windowWidth <= 500) {
+    image(img, 0, height * 0.3);
+  } else if (windowWidth <= 1000) {
+    image(img, 0, height * 0.2);
+  } else {
+    image(img, 0, 0);
   }
 }

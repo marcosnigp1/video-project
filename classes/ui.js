@@ -107,7 +107,6 @@ class UI {
       textSize(20);
       fill(0);
       text(this.text_b, this.position.x * 1.45, this.position.y * 0.94);
-
       pop();
     }
 
@@ -226,9 +225,17 @@ class UI {
     );
     pop();
 
+    //Text, cause there is no time to do something more complex.
+    push();
+    textSize(10);
+    strokeWeight(2);
+    text("Volume", this.position.x * 0.5, this.position.y * 1.105);
+    pop();
+
     //Circle to indicate where the volume is.
     push();
-    fill(30);
+    noFill();
+    stroke(30);
     circle(
       map(
         video.volume(),
