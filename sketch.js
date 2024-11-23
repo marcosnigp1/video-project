@@ -28,6 +28,8 @@ function setup() {
   windowResized();
   video.attribute("preload", "true");
   video.attribute("playsinline", "true");
+
+  video.volume(0);
 }
 
 function draw() {
@@ -39,6 +41,27 @@ function draw() {
   img.resize(windowWidth, 0);
   image(img, 0, 0); //redraws the video frame by frame in p5js.
   pop();
+
+  //Check if volume slider is pressed
+  if (mouseIsPressed) {
+    //Audio slider.
+    ///If mouse is clicked inside the bar, check current position and then adjust the volume.
+    if (
+      mouseX > ui.position.x * 0.2 &&
+      mouseX < ui.position.x * 0.65 + ui.position.x * 0.2 &&
+      mouseY > ui.position.y * 1.075 &&
+      mouseY < ui.position.y * 1.075 + ui.position.y * 0.01
+    ) {
+      let volume_value = map(
+        mouseX,
+        ui.position.x * 0.2,
+        ui.position.x * 0.65 + ui.position.x * 0.2,
+        0,
+        1.0
+      );
+      video.volume(volume_value);
+    }
+  }
 
   //Show UI.
   ui.show();
@@ -146,14 +169,29 @@ function keyPressed() {
 
 //Code for touchscreens.
 function touchStarted() {
-  if (playing && ui.decision_moment != 1) {
+  //Play and stop button.
+  if (
+    playing &&
+    ui.decision_moment != 1 &&
+    mouseX > ui.position.x * 1.08 &&
+    mouseX < ui.position.x * 1.15 &&
+    mouseY > ui.position.y * 1.055 &&
+    mouseY < ui.position.y * 1.11
+  ) {
     ui.pause_video();
-  } else if (ui.decision_moment != 1) {
+  } else if (
+    ui.decision_moment != 1 &&
+    mouseX > ui.position.x * 1.08 &&
+    mouseX < ui.position.x * 1.15 &&
+    mouseY > ui.position.y * 1.055 &&
+    mouseY < ui.position.y * 1.11
+  ) {
     ui.play_video();
-    //video.time(30.3);
+    //video.time(10.3);
   }
   playing = !playing;
 
+  //Decision boxes.
   if (
     mouseX > ui.position.x * 0.3 &&
     mouseX < ui.position.x * 0.9 &&
@@ -161,9 +199,9 @@ function touchStarted() {
     mouseY < ui.position.y * 1 &&
     ui.decision_moment == 1
   ) {
+    ui.play_video(); //First play the video, THEN JUMP to the seconds. Chrome has troubles understanding what to do if the time skip is done first...
     ui.jump_to_seconds(ui.time_skip_a);
     ui.decision_moment = 0;
-    ui.play_video();
   } else if (
     mouseX > ui.position.x * 1.3 &&
     mouseX < ui.position.x * 1.9 &&
@@ -171,8 +209,29 @@ function touchStarted() {
     mouseY < ui.position.y * 1 &&
     ui.decision_moment == 1
   ) {
+    ui.play_video();
     ui.jump_to_seconds(ui.time_skip_b);
     ui.decision_moment = 0;
-    ui.play_video();
+  }
+
+  //Fullscreen button.
+  if (
+    ui.fullscreen_mode == 0 &&
+    mouseX > ui.position.x * 1.33 &&
+    mouseX < ui.position.x * 1.39 &&
+    mouseY > ui.position.y * 1.06 &&
+    mouseY < ui.position.y * 1.103
+  ) {
+    fullscreen(true);
+    ui.fullscreen_mode = 1;
+  } else if (
+    ui.fullscreen_mode == 1 &&
+    mouseX > ui.position.x * 1.33 &&
+    mouseX < ui.position.x * 1.39 &&
+    mouseY > ui.position.y * 1.06 &&
+    mouseY < ui.position.y * 1.103
+  ) {
+    fullscreen(false);
+    ui.fullscreen_mode = 0;
   }
 }

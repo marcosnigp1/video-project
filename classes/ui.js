@@ -213,7 +213,6 @@ class UI {
     }
 
     // -------- Volume slider --------.
-
     push();
     stroke(0);
     strokeWeight(2);
@@ -227,11 +226,17 @@ class UI {
     );
     pop();
 
+    //Circle to indicate where the volume is.
     push();
-    //Circle for progress.
     fill(30);
     circle(
-      this.position.x * 0.2,
+      map(
+        video.volume(),
+        0.0,
+        1.0,
+        this.position.x * 0.2,
+        this.position.x * 0.65 + this.position.x * 0.2
+      ),
       this.position.y * 1.08,
       this.position.x * 0.04
     );
@@ -267,20 +272,6 @@ class UI {
 
       default:
         break;
-    }
-  }
-
-  //Updates the value of the volume slider.
-  update_volume_values(x, y) {
-    //Update values, such as position and audio time
-
-    this.song_time_total = round(audio.duration(), 0);
-    this.song_time_left = round(audio.currentTime(), 0);
-
-    if (audio.isPlaying()) {
-      this.play = 1;
-    } else {
-      this.play = 0;
     }
   }
 
