@@ -1,8 +1,22 @@
 canvas {
-      position: relative; /* Keeps the canvas in the center */
-      max-width: 100vw; /* Fit within the viewport's width */
-      max-height: 100vh; /* Fit within the viewport's height */
-      width: auto; /* Maintain aspect ratio */
-      height: auto; /* Maintain aspect ratio */
-      object-fit: contain; /* Ensures the entire canvas fits within the viewport */
-    }
+  position: absolute; /* Use absolute positioning for centering */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Align the center point */
+  max-width: 100vw; /* Fit within the viewport's width */
+  max-height: 100vh; /* Fit within the viewport's height */
+  width: auto; /* Maintain aspect ratio */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: contain; /* Ensures the canvas fits well within the viewport */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: black; /* Match the canvas background if desired */
+  overflow: hidden; /* Prevent scrolling when the canvas is fullscreen */
+}
