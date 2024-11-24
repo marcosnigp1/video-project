@@ -236,8 +236,8 @@ class UI {
     //Text, cause there is no time to do something more complex.
     push();
     textSize(10);
-    fill(229, 9, 20);
-    stroke(229, 9, 20);
+    fill(255);
+    stroke(255);
     strokeWeight(1);
     text("Volume", this.position.x * 0.5, this.position.y * 1.105);
     pop();
