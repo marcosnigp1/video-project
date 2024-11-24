@@ -3,11 +3,14 @@ canvas {
   top: 50%; /* Center vertically */
   left: 50%; /* Center horizontally */
   transform: translate(-50%, -50%); /* Align the center point */
-  max-width: 100vw; /* Fit within the viewport's width */
-  max-height: 100vh; /* Fit within the viewport's height */
+  max-width: 90vw; /* Fit within the viewport's width */
+  width: 900px;
+  max-height: 90vh; /* Fit within the viewport's height */
   width: auto; /* Maintain aspect ratio */
   height: auto; /* Maintain aspect ratio */
   object-fit: contain; /* Ensures the canvas fits well within the viewport */
+  box-sizing: border-box ;
+  border: 2px solid white;
 }
 
 body {
@@ -19,4 +22,14 @@ body {
   height: 100vh;
   background-color: black; /* Match the canvas background if desired */
   overflow: hidden; /* Prevent scrolling when the canvas is fullscreen */
+}
+
+@media (max-width: 768px) {
+  .video-style{
+      display: flex;
+      position: absolute;
+      margin-top: 50%;
+      width: 100vw;
+      height:100vh;
+    }
 }
