@@ -22,7 +22,7 @@
 
     <!-- Movie Playback Section -->
     <main class="movie-section">
-      <button class="back-arrow" onclick="window.location.href='index.html'">
+      <button class="back-arrow" onclick="goback()">
         &#8592;
       </button>
       <!--         <video controls autoplay class="movie-player">
@@ -34,4 +34,10 @@
     <script src="classes/ui.js"></script>
     <div></div>
   </body>
+  <script>
+     function goback() {
+            window.location.href = 'index.html';
+        }
+
+  </script>
 </html>
