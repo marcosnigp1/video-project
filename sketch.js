@@ -34,7 +34,6 @@ function setup() {
   windowResized();
 }
 
-
 function draw() {
   background(0);
 
@@ -322,7 +321,7 @@ function checkWindowWidth() {
     img.resize(windowWidth, 0); // Ensure it fits the screen width
   } else if (windowWidth <= 800) {
     // For mid-sized screens (e.g., tablets or smaller laptops)
-    image(img, 0, height * 0.1); // Slight vertical offset
+    image(img, 0, -(height * 0.03)); // Slight vertical offset
     img.resize(windowWidth * 0.9, 0); // Reduce size slightly for better fit
   } else if (windowWidth <= 1200) {
     // For larger mid-sized screens (e.g., standard laptops)
@@ -334,7 +333,6 @@ function checkWindowWidth() {
     img.resize(windowWidth, 0); // Keep full width
   }
 }
-
 
 function checkFontSize() {
   if (windowWidth <= 428) {
