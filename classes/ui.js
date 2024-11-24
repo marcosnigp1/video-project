@@ -16,6 +16,7 @@ class UI {
     //To get the values to jump to specific times.
     this.time_skip_a = 0;
     this.time_skip_b = 0;
+    this.spoon = 0;
 
     //Variables for volume slider.
     this.volume = 1.0;
@@ -27,8 +28,9 @@ class UI {
 
     //White bar that highlight the menu.
     push();
-    fill(255);
-    rect(0, height * 0.945, windowWidth, windowHeight);
+    fill(0);
+    stroke(229, 9, 20);
+    rect(0, height * 0.945, windowWidth + 20, windowHeight);
     pop();
 
     push();
@@ -63,7 +65,7 @@ class UI {
     if (this.decision_moment == 1) {
       //X sign indicating that the movie can not be started or stopped.
       push();
-      stroke(0);
+      stroke(255);
       strokeWeight(2);
 
       beginShape();
@@ -78,35 +80,41 @@ class UI {
       pop();
 
       //Decision boxes.
-      push();
 
       //Box A.
+      push();
+      fill(0);
+      stroke(229, 9, 20);
       beginShape();
       vertex(this.position.x * 0.3, this.position.y * 0.88);
       vertex(this.position.x * 0.9, this.position.y * 0.88);
       vertex(this.position.x * 0.9, this.position.y * 1);
       vertex(this.position.x * 0.3, this.position.y * 1);
-      endShape();
+      endShape(CLOSE);
 
       //Text parameters
-      textSize(20);
-      fill(0);
-      text(this.text_a, this.position.x * 0.45, this.position.y * 0.94);
+      checkFontSize();
+      stroke(0);
+      fill(255);
+      text(this.text_a, this.position.x * 0.49, this.position.y * 0.935);
       pop();
 
       //Box B.
       push();
+      fill(0);
+      stroke(229, 9, 20);
       beginShape();
       vertex(this.position.x * 1.3, this.position.y * 0.88);
       vertex(this.position.x * 1.9, this.position.y * 0.88);
       vertex(this.position.x * 1.9, this.position.y * 1);
       vertex(this.position.x * 1.3, this.position.y * 1);
-      endShape();
+      endShape(CLOSE);
 
       //Text parameters
-      textSize(20);
-      fill(0);
-      text(this.text_b, this.position.x * 1.45, this.position.y * 0.94);
+      checkFontSize();
+      stroke(0);
+      fill(255);
+      text(this.text_b, this.position.x * 1.49, this.position.y * 0.935);
       pop();
     }
 
@@ -114,7 +122,7 @@ class UI {
     if (this.fullscreen_mode == 0) {
       push();
       strokeWeight(3);
-      stroke(0);
+      stroke(255);
 
       //Left upper part.
       beginShape();
@@ -163,7 +171,7 @@ class UI {
     } else if (this.fullscreen_mode == 1) {
       push();
       strokeWeight(3);
-      stroke(0);
+      stroke(255);
 
       //Left upper part.
       beginShape();
@@ -213,7 +221,7 @@ class UI {
 
     // -------- Volume slider --------.
     push();
-    stroke(0);
+    stroke(255);
     strokeWeight(2);
     noFill();
     //Bar.
@@ -228,14 +236,17 @@ class UI {
     //Text, cause there is no time to do something more complex.
     push();
     textSize(10);
-    strokeWeight(2);
+    fill(229, 9, 20);
+    stroke(229, 9, 20);
+    strokeWeight(1);
     text("Volume", this.position.x * 0.5, this.position.y * 1.105);
     pop();
 
     //Circle to indicate where the volume is.
     push();
     noFill();
-    stroke(30);
+    stroke(255);
+    strokeWeight(2);
     circle(
       map(
         video.volume(),
@@ -253,24 +264,29 @@ class UI {
   show_decision(part) {
     switch (part) {
       case 1:
-        this.text_a = "Check oven again";
-        this.text_b = "Check Window";
-        this.time_skip_a = 15;
-        this.time_skip_b = 21;
+        this.text_a = "Shake Richmond \n to wake him up";
+        this.text_b = "Yell at Richmond \nto get a response";
+        this.time_skip_a = 81.6;
+        this.time_skip_b = 123.1;
         break;
 
       case 2:
-        this.text_a = "Explain";
-        this.text_b = "Run";
-        this.time_skip_a = 49;
-        this.time_skip_b = 67;
+        this.text_a = " Take a weapon \nto defend yourself";
+        this.text_b = "Try to escape \n   the dorm";
+        this.time_skip_a = 186.7;
+        this.time_skip_b = 193.6;
         break;
 
       case 3:
-        this.text_a = "'Yes'";
-        this.text_b = "'Its an expression'";
-        this.time_skip_a = 85;
-        this.time_skip_b = 95;
+        if (this.spoon == 0) {
+          this.text_a = "Try to move the \nbox with a shoe";
+          this.time_skip_a = 222;
+        } else if (this.spoon == 1) {
+          this.text_a = " Try to move the \nbox with the spoon";
+          this.time_skip_a = 226;
+        }
+        this.text_b = "Stand up and investigate \n      the box closely";
+        this.time_skip_b = 230;
         break;
 
       case 4:

@@ -9,9 +9,11 @@ let img;
 
 //Variables for UI.
 let ui;
+let reset;
 
 function preload() {
   video = createVideo("media/richmond.mp4");
+  reset = loadImage("media/reset.png");
 }
 
 function setup() {
@@ -67,15 +69,40 @@ function draw() {
   ui.show();
   //print(video.time());
 
-  //Check if video is in certain seconds to call the decisions. (IF CONDITIONS EVERYWHERE).
-  if (video.time() > 19.4 && video.time() < 20.0) {
+  //Check if video is in certain seconds to call the decisions. (IF CONDITIONS EVERYWHERE IN THIS FUNCTION).
+  checkDecision();
+  checkSkipper(); //Skips video in certain scene to the correct time stamp.
+}
+
+function checkDecision() {
+  //Warning, there is a lot of if conditions here.
+  if (video.time() > 81.0 && video.time() < 81.5) {
     ui.decision_moment = 1;
     ui.show_decision(1);
     ui.pause_video();
-  } else if (video.time() > 33.0 && video.time() < 40.0) {
+  } else if (video.time() > 186.3 && video.time() < 186.6) {
     ui.decision_moment = 1;
     ui.show_decision(2);
     ui.pause_video();
+  } else if (video.time() > 221.0 && video.time() < 221.5) {
+    ui.decision_moment = 1;
+    ui.show_decision(3);
+    ui.pause_video();
+  } else if (video.time() > 271) {
+    ui.state = 0;
+    filter(GRAY);
+  }
+}
+
+//The spoon will also be checked here.
+function checkSkipper() {
+  if (video.time() > 122.5 && video.time() < 123.0) {
+    video.time(161);
+  } else if (video.time() > 192.4 && video.time() < 192.95) {
+    ui.spoon = 1; //Spoon will be registered as taken.
+    video.time(206.35);
+  } else if (video.time() > 225 && video.time() < 225.5) {
+    video.time(232);
   }
 }
 
@@ -90,7 +117,13 @@ function mousePressed() {
     mouseY > ui.position.y * 1.055 &&
     mouseY < ui.position.y * 1.11
   ) {
-    ui.pause_video();
+    if (video.time() > 271) {
+      video.time(0);
+      video.play();
+      ui.state = 1;
+    } else {
+      ui.pause_video();
+    }
   } else if (
     ui.decision_moment != 1 &&
     mouseX > ui.position.x * 1.08 &&
@@ -159,6 +192,22 @@ function keyPressed() {
         ui.fullscreen_mode = 0;
       }
     }
+  }
+  //For testing purposes.
+  if (key == "1") {
+    video.time(79);
+  } else if (key == "2") {
+    video.time(121);
+  } else if (key == "3") {
+    video.time(185);
+  } else if (key == "4") {
+    video.time(219);
+  } else if (key == "5") {
+    ui.spoon = 1;
+    video.time(219);
+  } else if (key == "6") {
+    ui.spoon = 1;
+    video.time(269);
   }
 }
 
@@ -265,12 +314,24 @@ function windowResized() {
 //Used mostly for responsiveness on phones.
 function checkWindowWidth() {
   if (windowWidth <= 428) {
-    image(img, 0, height * 0.4);
+    image(img, 0, height * 0.3);
   } else if (windowWidth <= 500) {
     image(img, 0, height * 0.3);
-  } else if (windowWidth <= 1000) {
-    image(img, 0, height * 0.2);
+  } else if (windowWidth <= 800) {
+    image(img, 0, -(height * 0.2));
   } else {
     image(img, 0, 0);
+  }
+}
+
+function checkFontSize() {
+  if (windowWidth <= 428) {
+    textSize(6);
+  } else if (windowWidth <= 500) {
+    textSize(7);
+  } else if (windowWidth <= 900) {
+    textSize(12);
+  } else {
+    textSize(19);
   }
 }
