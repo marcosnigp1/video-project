@@ -194,7 +194,7 @@ function keyPressed() {
     }
   }
   //For testing purposes.
-  if (key == "1") {
+  /*   if (key == "1") {
     video.time(79);
   } else if (key == "2") {
     video.time(121);
@@ -208,7 +208,7 @@ function keyPressed() {
   } else if (key == "6") {
     ui.spoon = 1;
     video.time(269);
-  }
+  } */
 }
 
 //Code for touchscreens.
