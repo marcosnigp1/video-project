@@ -20,17 +20,20 @@ function setup() {
   frameRate(60);
   createCanvas(windowWidth, windowHeight);
 
-  //Preparing video.
-  //video.size(windowWidth, windowHeight);
-  video.hide();
-  video.hideControls();
+  // Preparing video
+  video.hide(); // Hide the default video element initially
+  video.hideControls(); // Hide default controls
+  video.addClass("video-style"); // Add custom class for styling
+  video.attribute("preload", "true"); // Preload the video
+  video.attribute("playsinline", "true"); // Ensure the video plays inline on mobile browsers
 
-  //Preparing UI class.
+  // Preparing UI class
   ui = new UI(width * 0.45, height * 0.9, 2);
+
+  // Handle resizing
   windowResized();
-  video.attribute("preload", "true");
-  video.attribute("playsinline", "true");
 }
+
 
 function draw() {
   background(0);
@@ -314,15 +317,24 @@ function windowResized() {
 //Used mostly for responsiveness on phones.
 function checkWindowWidth() {
   if (windowWidth <= 428) {
-    image(img, 0, height * 0.3);
-  } else if (windowWidth <= 500) {
-    image(img, 0, height * 0.3);
+    // For very small screens (e.g., phones)
+    image(img, 0, height * 0.3); // Adjust position for phones
+    img.resize(windowWidth, 0); // Ensure it fits the screen width
   } else if (windowWidth <= 800) {
-    image(img, 0, -(height * 0.2));
+    // For mid-sized screens (e.g., tablets or smaller laptops)
+    image(img, 0, height * 0.1); // Slight vertical offset
+    img.resize(windowWidth * 0.9, 0); // Reduce size slightly for better fit
+  } else if (windowWidth <= 1200) {
+    // For larger mid-sized screens (e.g., standard laptops)
+    image(img, width * 0.05, height * 0.05); // Center slightly
+    img.resize(windowWidth * 0.85, 0); // Scale video to fit
   } else {
-    image(img, 0, 0);
+    // For large screens
+    image(img, 0, 0); // Full canvas display
+    img.resize(windowWidth, 0); // Keep full width
   }
 }
+
 
 function checkFontSize() {
   if (windowWidth <= 428) {
