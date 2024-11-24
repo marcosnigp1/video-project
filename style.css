@@ -244,7 +244,7 @@ a{
     padding: 20px;
     color: #fff;
     background-color: #000;
-    margin-top: 9%;
+    margin-top: 20%;
     display: flex;
     flex-wrap: wrap;
     margin-left: 10px;
@@ -262,7 +262,7 @@ a{
     display: flex;
     align-self: center;
     justify-self: center;
-    width: 400px;
+    width: 300px;
     height: auto;
     border-radius: 10px;
     margin-right: 5px;
