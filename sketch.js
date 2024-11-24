@@ -92,6 +92,7 @@ function checkDecision() {
     ui.pause_video();
   } else if (video.time() > 271) {
     ui.state = 0;
+    ui.spoon = 0;
     filter(GRAY);
   }
 }
